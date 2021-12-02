@@ -1,30 +1,18 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
-  <router-view/>
+    <TopNav />
+    <div class="w-full h-full flex justify-center bg-gray-100 pt-3 pb-3">
+      <div class="w-full max-w-7xl px-5 text-base">
+        <router-view />
+      </div>
+    </div>
+    <div class="flex w-full h-32 bg-gray-700"></div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+<script>
+import TopNav from "./components/TopNav.vue";
+export default {
+  components: {
+    TopNav,
+  },
+};
+</script>

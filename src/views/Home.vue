@@ -1,18 +1,61 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="flex">
+    <sidebar :items="items"/>
+    <content-wrapper :title="`All Courses`">
+      <CourseListing :coursesList="items" />
+    </content-wrapper>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import CourseListing from "../components/CourseListing.vue";
+import ContentWrapper from "../components/ContentWrapper.vue";
+import Sidebar from "../components/Sidebar.vue";
 
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld
-  }
-}
+  name: "Home",
+  components: { CourseListing, ContentWrapper, Sidebar},
+  data() {
+    return {
+      items: [
+        {
+          courseName: "Math for beginners",
+          courseUrl: "google.com",
+        },
+        {
+          courseName: "Biology I",
+          courseUrl: "blahblahblah",
+        },
+        {
+          courseName: "Biology I",
+          courseUrl: "blahblahblah",
+        },
+        {
+          courseName: "Biology I",
+          courseUrl: "blahblahblah",
+        },
+        {
+          courseName: "Biology I",
+          courseUrl: "blahblahblah",
+        },
+        {
+          courseName: "Biology I",
+          courseUrl: "blahblahblah",
+        },
+        {
+          courseName: "Biology I",
+          courseUrl: "blahblahblah",
+        },
+        {
+          courseName: "Biology I",
+          courseUrl: "blahblahblah",
+        },
+        {
+          courseName: "Biology I",
+          courseUrl: "blahblahblah",
+        },
+      ],
+    };
+  },
+};
 </script>
