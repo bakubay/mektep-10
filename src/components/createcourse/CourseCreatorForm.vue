@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col w-auto mt-10 mx-10 h-auto">
     <form action="" method="post">
-      <div class="flex flex-col bg-gray-50 px-10 h-auto rounded-lg py-4">
+      <div class="flex flex-col bg-gray-50 shadow-md px-10 h-auto py-4">
         <h1 class="text-gray-500">Section {{ index + 1 }}</h1>
         <div class="flex items-center">
           <div class="w-full flex py-3 items-center space-x-2">
