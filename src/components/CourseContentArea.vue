@@ -9,7 +9,7 @@
         <span>→</span>
       </button>
     </div>
-    <div class="flex justify-center h-52 border-2 mt-6 p-2 bg-green-100">
+    <div class="flex justify-center h-52 mt-6 p-2 bg-gray-50">
         <h1 class="text-xl ">Quiz</h1>
     </div>
   </div>
