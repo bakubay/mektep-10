@@ -1,7 +1,11 @@
 // Import the functions you need from the SDKs you need
 
-import { initializeApp } from "firebase/app"
-import { getFirestore } from "firebase/firestore"
+import {
+  initializeApp
+} from "firebase/app"
+import {
+  getFirestore
+} from "firebase/firestore"
 
 const firebaseConfig = {
 
@@ -23,14 +27,42 @@ initializeApp(firebaseConfig);
 // Initialize Firebase
 const db = getFirestore();
 
-import { collection, getDocs } from "firebase/firestore"; 
+import {
+  collection,
+  getDocs
+} from "firebase/firestore";
 
 
 
-export const logstuff = async () =>{ 
-  const querySnapshot =  await getDocs(collection(db, "courses"));
+export const logstuff = async () => {
+  const querySnapshot = await getDocs(collection(db, "courses"));
   querySnapshot.forEach((doc) => {
-  console.log(`${doc.id} => ${doc.data().name}`);
-});
-console.log("LOG STUFF");
+    console.log(`${doc.id} => ${doc.data().name}`);
+  });
+}
+
+import {
+  writeBatch,
+  doc
+} from "firebase/firestore"
+export const addCourse = async (course) => {
+  const batch = writeBatch(db);
+  const courseRef = doc(db, "courses", course.courseInfo.courseId);
+  batch.set(courseRef, {
+    courseName: course.courseInfo.courseName,
+    courseDescription: course.courseInfo.courseDescription,
+    courseImageUrl: course.courseInfo.courseImageUrl,
+    courseCategory: course.courseInfo.courseCategory,
+  });
+
+  course.sections.forEach(function (section) {
+    const sectionRef = doc(db, "courses", course.courseInfo.courseId, "sections", section.id);
+    batch.set(sectionRef, {
+      title: section.title,
+      url: section.url,
+      description: section.description,
+      addRes: section.addRes,
+    })
+  })
+  await batch.commit();
 }

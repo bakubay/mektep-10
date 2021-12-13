@@ -1,5 +1,5 @@
 <template>
-  <div id="contentWrapper" class="w-full lg:static lg:overflow-visible bg-white shadow-md">
+  <div id="contentWrapper" class="w-full h-auto min-h-screen lg:static lg:overflow-visible bg-white shadow-md">
     <div class="w-full flex">
       <div class="flex-auto px-4 sm:px-6 xl:px-8 pt-10 pb-5 lg:pb-5">
         <div class="text-lg font-bold text-center pt-2 border-b-2">{{title}}</div>
