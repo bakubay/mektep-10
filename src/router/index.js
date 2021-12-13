@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Course from '../views/Course.vue'
 import CreateCourse from '../views/CreateCourse.vue'
+import Browse from '../views/Browse'
 
 
 const routes = [
@@ -19,6 +20,11 @@ const routes = [
     path: '/course/:name',
     name: 'Course',
     component: Course
+  },
+  {
+    path: '/browse/:category',
+    name: 'Browse',
+    component: Browse
   },
   {
     path: '/create-course',

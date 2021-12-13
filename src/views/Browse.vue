@@ -1,7 +1,7 @@
 <template>
   <div class="flex">
     <sidebar :items="items"/>
-    <content-wrapper :title="`All courses`">
+    <content-wrapper :title="$route.params.category">
       <CourseListing :coursesList="items" />
     </content-wrapper>
   </div>
@@ -13,7 +13,7 @@ import ContentWrapper from "../components/ContentWrapper.vue";
 import Sidebar from "../components/Sidebar.vue";
 
 export default {
-  name: "Home",
+  name: "Browse",
   components: { CourseListing, ContentWrapper, Sidebar},
   data() {
     return {
