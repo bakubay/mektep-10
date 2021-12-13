@@ -11,6 +11,7 @@
 import CourseListing from "../components/CourseListing.vue";
 import ContentWrapper from "../components/ContentWrapper.vue";
 import Sidebar from "../components/Sidebar.vue";
+import { logstuff } from "../firebase"
 
 export default {
   name: "Home",
@@ -57,5 +58,8 @@ export default {
       ],
     };
   },
+  setup(){
+    logstuff()
+  }
 };
 </script>
