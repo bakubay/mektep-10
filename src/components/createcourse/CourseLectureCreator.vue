@@ -1,11 +1,11 @@
 <template>
   <div class="flex">
-    <div class="flex flex-col w-full min-h-full py-2 my-4">
-      <div class="text-base">Here you can create courses by addingn sections and content.</div>
+    <div class="flex flex-col bg-gray-200 shadow-md w-full min-h-full px-2 py-2 my-4">
+      <div class="text-lg text-center font-bold text-gray-700">Create sections and add content</div>
       <course-lecture-creator-form v-for="(section, index) of courseSections" :key="section.id" :index="index" @section-saved="saveSession($event, section)"  @remove-section="removeSession(index)"/>
       <div class="flex mt-4 w-full justify-between">
         <button @click="addSection" class="px-3 w-15 bg-green-200 hover:bg-blue-300">+</button>
-        <button @click="onSectionsCreated" class="p-3 w-32 bg-green-500 hover:bg-green-300 rounded">Save Sections</button>
+        <button @click="onSectionsCreated" class="p-3 w-32 bg-green-500 hover:bg-green-300 rounded text-white">Submit</button>
       </div>
     </div>
   </div>
@@ -36,6 +36,7 @@ export default {
       uuid++;
       courseSections.value.push({
         id: "section-id-" + uuid,
+        plug: "",
         title: "",
         url: "",
         description: "",
@@ -50,6 +51,7 @@ export default {
     };
     const saveSession = (event, section) => {
       section.title = event.sectionTitle;
+      section.plug = event.sectionUrl;
       section.url = event.sectionVideoUrl;
       section.description = event.sectionDescription;
       section.addRes = event.sectionAddRes;
