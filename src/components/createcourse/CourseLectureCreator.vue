@@ -5,7 +5,7 @@
       <course-lecture-creator-form v-for="(section, index) of courseSections" :key="section.id" :index="index" @section-saved="saveSession($event, section)"  @remove-section="removeSession(index)"/>
       <div class="flex mt-4 w-full justify-between">
         <button @click="addSection" class="px-3 w-15 bg-green-200 hover:bg-blue-300">+</button>
-        <button @click="onSectionsCreated" class="p-3 w-32 bg-green-500 hover:bg-green-300 rounded">Submit</button>
+        <button @click="onSectionsCreated" class="p-3 w-32 bg-green-500 hover:bg-green-300 rounded">Save Sections</button>
       </div>
     </div>
   </div>

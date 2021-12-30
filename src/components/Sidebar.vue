@@ -61,7 +61,7 @@
             @click="onSelectedSidebarItem(item, i)"
             class="hover:bg-gray-300 transition-colors duration-200"
           >
-            <router-link class="px-3 py-2 relative block text-gray-900" :to=" `/browse/` + item.courseUrl">{{
+            <router-link class="px-3 py-2 relative block text-gray-900" :to="item.courseUrl">{{
               item.courseName
             }}</router-link>
           </li>
