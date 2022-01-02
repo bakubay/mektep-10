@@ -40,7 +40,6 @@
           pb-10
           lg:pt-10 lg:pb-14
           sticky?lg:h-(screen-18)
-          h-screen
         "
       >
         <div
@@ -51,7 +50,7 @@
             border-b-2 border-gray-200 border-transparent
           "
         >
-          Courses
+          Table of Content
         </div>
         <ul>
           <li

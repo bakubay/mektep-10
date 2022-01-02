@@ -1,31 +1,54 @@
-import Vue from "vue";
-import Vuex from "vuex";
-import firebase from "firebase/app";
+import {
+    createStore
+} from "vuex";
 import "firebase/auth";
-import db from "../firebase/firebaseInit";
+import {
+    db
+} from "../firebase";
+import {
+    collection,
+    getDocs,
+    orderBy,
+    query
+} from "firebase/firestore";
 
-Vue.use(Vuex);
-
-export default new Vuex.Store({
-    state: {
-        courses: [],
-        courseLoaded: null,
-    },
-    getters: {
-        coursesCards(state) {
-            return courses;
+const store = createStore({
+    state() {
+        return {
+            courses: [],
+            currentSections: [],
+            courseLoaded: null,
         }
     },
+    getters: {},
     mutations: {
 
     },
     actions: {
-        async getCourse({ state }) {
-            const db = await ab.collection("courses").orderBy("date", "desc");
-            const dbResults = await db.get();
-            dbResults.forEach((doc) => {
-
-            })
+        async pullCourses({state}) {
+            const coursesRef = collection(db, "courses");
+            const q = query(coursesRef, orderBy('courseName', 'desc'));
+            const querySnapshot = await getDocs(q);
+            querySnapshot.forEach((doc) => {
+                if (!state.courses.some((course) => course.courseId === doc.id)) {
+                    const course = {
+                        courseId: doc.id,
+                        courseCategory: doc.data().courseCategory,
+                        courseDescription: doc.data().courseDescription,
+                        courseImageUrl: doc.data().courseImageUrl,
+                        courseName: doc.data().courseName,
+                    }
+                    state.courses.push(course)
+                }
+            });
+            this.state.courseLoaded = true;
+        },
+        async pullCourseSections({ state }, courseId){ 
+            const sectionsRef = collection(db, "courses", courseId, "sections");
+            const querySnapshot = await getDocs(sectionsRef);
+            state.currentSections = querySnapshot.docs;
         }
     }
 })
+
+export default store;

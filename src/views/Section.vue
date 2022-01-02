@@ -1,7 +1,7 @@
 <template>
   <div class="flex">
     <sidebar :items="sections" />
-    <content-wrapper :title="$route.params.section">
+    <content-wrapper :title="sections[0].courseName">
       <course-content-area/>
       <div class="flex w-full mt-5 justify-between text-xl">
         <button class="bg-green-200 p-3 w-12 hover:bg-green-300">

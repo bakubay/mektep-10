@@ -1,18 +1,22 @@
 <template>
+<div class="flex flex-col h-screen">
     <TopNav />
-    <div class="w-full h-full flex justify-center bg-gray-100 pt-3 pb-3">
-      <div class="w-full max-w-7xl px-5 text-base">
+    <Body>
         <router-view />
-      </div>
-    </div>
-    <div class="flex w-full h-32 bg-gray-700"></div>
+    </Body>
+    <Footer />
+</div>
 </template>
 
 <script>
+import Body from './components/Body.vue';
 import TopNav from "./components/TopNav.vue";
+import Footer from "./components/Footer.vue"
 export default {
   components: {
     TopNav,
+    Body,
+    Footer
   },
 };
 </script>

@@ -25,21 +25,7 @@ const firebaseConfig = {
 
 initializeApp(firebaseConfig);
 // Initialize Firebase
-const db = getFirestore();
-
-import {
-  collection,
-  getDocs
-} from "firebase/firestore";
-
-
-
-export const logstuff = async () => {
-  const querySnapshot = await getDocs(collection(db, "courses"));
-  querySnapshot.forEach((doc) => {
-    console.log(`${doc.id} => ${doc.data().name}`);
-  });
-}
+export const db = getFirestore();
 
 import {
   writeBatch,
