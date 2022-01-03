@@ -4,10 +4,10 @@
     <content-wrapper :title="currentSection.title">
       <course-content-area/>
       <div class="flex w-full mt-5 justify-between text-xl">
-        <button class="bg-green-200 p-3 w-12 hover:bg-green-300">
+        <button v-if="currentSection.index === 1" class="bg-green-200 p-3 w-12 hover:bg-green-300">
           <span @click="goToPreviousSection">←</span>
         </button>
-        <button class="bg-green-200 p-3 w-12 hover:bg-green-300">
+        <button v-if="currentSection.index === sections.length + 1" class="bg-green-200 p-3 w-12 hover:bg-green-300">
           <span @click="goToNextSection">→</span>
         </button>
       </div>
@@ -29,11 +29,11 @@ export default {
     },
     currentSection(){
       return this.sections.find((section) => section.url === this.$route.params.sectionId)
-    }
+    },
   },
   methods: {
     goToNextSection() {
-      return 0;
+      return this.sections.find((section) => section.index === this.$store.state.currentSection.index);
     },
     goToPreviousSection(){
       return 0;
