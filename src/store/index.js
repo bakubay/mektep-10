@@ -48,13 +48,14 @@ const store = createStore({
             this.state.courseLoaded = true;
         },
         async pullCourseSections({ state }, courseId){ 
-            this.currentSections = []
+            const firestoreSections = []
             const sectionsRef = collection(db, "courses", courseId, "sections");
             const querySnapshot = await getDocs(sectionsRef);
             querySnapshot.forEach((doc) => {
                 const section = doc.data()
-                state.currentSections.push(section)
+                firestoreSections.push(section)
             });
+            state.currentSections = firestoreSections
         }
     }
 })
