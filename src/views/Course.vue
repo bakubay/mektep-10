@@ -1,6 +1,6 @@
 <template>
   <div class="flex" v-if="currentCourse">
-    <sidebar :items="sections" />
+    <sidebar :sections="sections" />
     <content-wrapper :title="currentCourse[0].courseName">
       <div class="flex flex-col-reverse md:flex-row mt-4 justify-between py-4">
         <div class="flex-1 mr-4">{{currentCourse[0].courseDescription}}</div>
@@ -24,12 +24,11 @@ export default {
   data(){
     return {
       currentCourse: null,
-      currentCourseSections: null,
       }
   },
   computed: {
     sections(){
-      return this.$store.state.currentCourseSections
+      return this.$store.state.currentSections
     }
   },
   async mounted(){
@@ -37,7 +36,6 @@ export default {
       return course.courseId === this.$route.params.courseId;
     });
     this.$store.dispatch("pullCourseSections", this.$route.params.courseId)
-    this.currentCourseSections = await this.$store.state.currentCourseSections
   }
 };
 

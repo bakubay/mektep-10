@@ -20,7 +20,11 @@ const store = createStore({
             courseLoaded: null,
         }
     },
-    getters: {},
+    getters: {
+        getCourseById: (state) => (id) => {
+            return state.courses.find(course => course.courseId === id)
+        }
+    },
     mutations: {
 
     },
@@ -44,9 +48,13 @@ const store = createStore({
             this.state.courseLoaded = true;
         },
         async pullCourseSections({ state }, courseId){ 
+            this.currentSections = []
             const sectionsRef = collection(db, "courses", courseId, "sections");
             const querySnapshot = await getDocs(sectionsRef);
-            state.currentSections = querySnapshot.docs;
+            querySnapshot.forEach((doc) => {
+                const section = doc.data()
+                state.currentSections.push(section)
+            });
         }
     }
 })

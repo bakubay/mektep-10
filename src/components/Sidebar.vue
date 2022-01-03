@@ -54,15 +54,17 @@
         </div>
         <ul>
           <li
-            v-for="(item, i) in items"
+            v-for="(section, i) in sections"
             :key="i"
-            :class="{ activeClass: activeItem==i}"
+            :class="{ activeClass: activeItem == i }"
             @click="onSelectedSidebarItem(item, i)"
             class="hover:bg-gray-300 transition-colors duration-200"
           >
-            <router-link class="px-3 py-2 relative block text-gray-900" :to="item.courseUrl">{{
-              item.courseName
-            }}</router-link>
+            <router-link
+              class="px-3 py-2 relative block text-gray-900"
+              :to="{name: 'Section', params: {sectionId: section.url}}"
+              >{{ section.title }}</router-link
+            >
           </li>
         </ul>
       </nav>
@@ -71,9 +73,9 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref } from "vue";
 export default {
-  props: ["items"],
+  props: ["sections"],
   setup() {
     let activeItem = ref(-1);
 
