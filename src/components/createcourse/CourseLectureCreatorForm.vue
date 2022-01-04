@@ -51,6 +51,7 @@ export default {
       this.sectionData.sectionSlug = slugify(this.sectionData.sectionTitle)
       this.$emit("section-saved", this.sectionData);
       this.isDisabled = true;
+      this.sectionData.sectionIndex = this.index;
     },
     onRemoveSection() {
       this.$emit("remove-section");
@@ -72,6 +73,7 @@ export default {
   setup() {
     const sectionData = {
       sectionTitle: "",
+      sectionIndex: "",
       sectionSlug: "",
       sectionVideoUrl: "",
       sectionDescription: "",

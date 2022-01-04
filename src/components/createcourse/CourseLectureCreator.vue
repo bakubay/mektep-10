@@ -26,8 +26,10 @@ export default {
     let courseSections = ref([
       {
         id: "section-id-" + uuid,
+        slug: "",
         title: "",
         url: "",
+        index: "",
         description: "",
         addRes: "",
       },
@@ -36,7 +38,8 @@ export default {
       uuid++;
       courseSections.value.push({
         id: "section-id-" + uuid,
-        plug: "",
+        index: 0,
+        slug: "",
         title: "",
         url: "",
         description: "",
@@ -51,7 +54,8 @@ export default {
     };
     const saveSession = (event, section) => {
       section.title = event.sectionTitle;
-      section.plug = event.sectionUrl;
+      section.slug = event.sectionSlug;
+      section.index = event.sectionIndex;
       section.url = event.sectionVideoUrl;
       section.description = event.sectionDescription;
       section.addRes = event.sectionAddRes;
