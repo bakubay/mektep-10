@@ -21,8 +21,6 @@ import Sidebar from "../components/Sidebar.vue";
 import CourseContentArea from "../components/CourseContentArea.vue";
 export default {
   components: {Sidebar, ContentWrapper, CourseContentArea },
-  data() {
-  },
   computed:{
     sections(){
       return this.$store.state.currentSections;

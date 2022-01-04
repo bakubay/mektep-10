@@ -16,7 +16,12 @@ const store = createStore({
     state() {
         return {
             courses: [],
-            currentSections: [],
+            currentSections: [{
+                description:"adf",
+                addRes:"adf",
+                title:"lecture 1",
+                url:"asdf"
+            }],
             courseLoaded: null,
         }
     },

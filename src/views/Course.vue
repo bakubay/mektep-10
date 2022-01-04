@@ -1,5 +1,5 @@
 <template>
-  <div class="flex" v-if="currentCourse">
+  <div class="flex">
     <sidebar :sections="sections" />
     <content-wrapper :title="currentCourse.courseName">
       <div class="flex flex-col-reverse md:flex-row mt-4 justify-between py-4">
@@ -9,8 +9,8 @@
             class="w-36 h-36 md:w-full md:h-auto md:rounded-none rounded-full"
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Coursera-Logo_600x600.svg/1200px-Coursera-Logo_600x600.svg.png"
           />
-          <router-link 
-          :to="{name: 'Section', params: {sectionId: sections[1].url}}" 
+          <router-link v-if="sections"
+          :to="{name: 'Section', params: {sectionId: sections.find((e) => true).url}}" 
           class="w-full px-6 py-2 mt-2 bg-green-100 hover:bg-green-500 text-center"
           >Start</router-link>
         </div>
@@ -24,19 +24,16 @@ import ContentWrapper from "../components/ContentWrapper.vue";
 import Sidebar from "../components/Sidebar.vue";
 export default {
   components: { ContentWrapper, Sidebar },
-  data(){
-    return {
-      currentCourse: null,
-      }
-  },
   computed: {
     sections(){
-      return this.$store.state.currentSections;
+      return this.$store.state.currentSections ? this.$store.state.currentSections : [];
+    },
+    currentCourse(){
+      return this.$store.getters.getCourseById(this.$route.params.courseId);
     }
   },
-  async created(){
-    this.currentCourse =  this.$store.getters.getCourseById(this.$route.params.courseId);
-    await this.$store.dispatch("pullCourseSections", this.$route.params.courseId);
+  created(){
+    this.$store.dispatch("pullCourseSections", this.$route.params.courseId);
   }
 };
 
