@@ -47,6 +47,7 @@ export const addCourse = async (course) => {
       title: section.title,
       url: section.url,
       description: section.description,
+      index: section.index,
       addRes: section.addRes,
     })
   })

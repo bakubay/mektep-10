@@ -62,7 +62,7 @@
           >
             <router-link
               class="px-3 py-2 relative block text-gray-900"
-              :to="{name: 'Section', params: {sectionId: section.url}}"
+              :to="{name: 'Section', params: {sectionId: section.index}}"
               >{{ section.title }}</router-link
             >
           </li>

@@ -26,7 +26,7 @@ export default {
       return this.$store.state.currentSections;
     },
     currentSection(){
-      return this.sections.find((section) => section.url === this.$route.params.sectionId)
+      return this.sections.find((section) => section.index === this.$route.params.sectionId)
     },
   },
   methods: {
