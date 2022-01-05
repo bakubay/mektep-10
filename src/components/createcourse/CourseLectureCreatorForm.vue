@@ -49,9 +49,9 @@ export default {
   methods: {
     onSaveSection() {
       this.sectionData.sectionSlug = slugify(this.sectionData.sectionTitle)
+      this.sectionData.sectionIndex = this.index + 1;
       this.$emit("section-saved", this.sectionData);
       this.isDisabled = true;
-      this.sectionData.sectionIndex = this.index;
     },
     onRemoveSection() {
       this.$emit("remove-section");
