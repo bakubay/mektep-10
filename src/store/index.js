@@ -19,6 +19,7 @@ const store = createStore({
             currentSections: [{
                 description:"adf",
                 addRes:"adf",
+                index: 0,
                 title:"lecture 1",
                 url:"asdf"
             }],
