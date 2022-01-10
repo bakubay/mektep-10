@@ -83,7 +83,7 @@ export default {
       activeItem.value = i;
     };
     return { activeItem, onSelectedSidebarItem };
-  },
+  }, 
 };
 </script>
 

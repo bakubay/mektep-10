@@ -21,7 +21,7 @@ export default {
   },
   computed: {
     courses(){
-      return this.$store.state.courses
+      return this.$store.getters.getCourses;
     }
   },
   created(){
