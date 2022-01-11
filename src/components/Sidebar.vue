@@ -56,8 +56,7 @@
           <li
             v-for="(section, i) in sections"
             :key="i"
-            :class="{ activeClass: activeItem == i }"
-            @click="onSelectedSidebarItem(item, i)"
+            :class="{ activeClass: sectionId == i + 1 }"
             class="hover:bg-gray-300 transition-colors duration-200"
           >
             <router-link
@@ -73,17 +72,8 @@
 </template>
 
 <script>
-import { ref } from "vue";
 export default {
-  props: ["sections"],
-  setup() {
-    let activeItem = ref(-1);
-
-    const onSelectedSidebarItem = (item, i) => {
-      activeItem.value = i;
-    };
-    return { activeItem, onSelectedSidebarItem };
-  }, 
+  props: ["sections", "sectionId"],
 };
 </script>
 

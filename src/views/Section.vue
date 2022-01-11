@@ -1,6 +1,6 @@
 <template>
   <div class="flex" v-if="currentCourse && currentSection && sectionsReady">
-    <sidebar :sections="currentCourse.courseSections" />
+    <sidebar :sections="currentCourse.courseSections" :sectionId="this.$route.params.sectionId"/>
     <content-wrapper :title="currentSection.title">
       <course-content-area/>
       <div class="w-full mt-5 text-xl">
