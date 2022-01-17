@@ -18,13 +18,7 @@ const store = createStore({
     state() {
         return {
             courses: [],
-            currentSections: [{
-                description: "adf",
-                addRes: "adf",
-                index: 0,
-                title: "lecture 1",
-                url: "asdf"
-            }],
+            showMobileMenu: false
         }
     },
     getters: {
@@ -57,6 +51,9 @@ const store = createStore({
         },
         SET_CURRENT_COURSE(state, course){
             state.currentCourse = course;
+        },
+        toggleMobileMenu(state){
+            state.showMobileMenu = !state.showMobileMenu
         }
     },
     actions: {

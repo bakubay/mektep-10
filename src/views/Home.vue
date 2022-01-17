@@ -1,5 +1,5 @@
 <template>
-  <div class="flex">
+  <div class="flex" v-if="coursesLoaded">
     <!-- <sidebar :items="items"/> -->
     <content-wrapper :title="`All courses`">
       <CourseListing :coursesList="courses" />
@@ -16,7 +16,7 @@ export default {
   components: { CourseListing, ContentWrapper},
   data() {
     return {
-
+      coursesLoaded: false
     };
   },
   computed: {
@@ -25,7 +25,7 @@ export default {
     }
   },
   created(){
-    this.$store.dispatch("pullCourses")
+    this.$store.dispatch("pullCourses").then(()=> this.coursesLoaded = true)
   }
 };
 </script>

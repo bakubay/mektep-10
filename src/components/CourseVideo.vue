@@ -3,7 +3,7 @@
     <iframe
       width="100%"
       height="480px"
-      src="https://www.youtube.com/embed/JnGXTk57rOU"
+      :src="videoUrl"
       title="YouTube video player"
       frameborder="0"
       allow=""
@@ -14,7 +14,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["videoUrl"]
+};
 </script>
 
 <style></style>
