@@ -10,18 +10,29 @@
         <router-link  class="text-gray-400 md:text-base text-sm hover:text-gray-700" to="/about">About</router-link >
       </div>
       </div>
-  </div>
+    </div>
+  <login-popup v-if="isLoginPopupActive" class="fixed right-0 mt-12 z-50"/>
 </template>
 
 <script>
 import { MenuAlt2Icon } from '@heroicons/vue/outline';
+import LoginPopup from './LoginPopup.vue';
+
 export default {
-  components: {MenuAlt2Icon},
+  components: {MenuAlt2Icon, LoginPopup},
   methods:{
     toggleMobileMenu(){
       console.log("Show Mobile menu")
       this.$store.commit("toggleMobileMenu")
-    }
-  }
+    },
+        showLoginPopup() {
+      this.isLoginPopupActive = !this.isLoginPopupActive;
+    },
+  },
+  data() {
+    return {
+      isLoginPopupActive: false,
+    };
+  },
 };
 </script>
