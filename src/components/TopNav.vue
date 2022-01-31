@@ -15,7 +15,7 @@
       </div>
     </div>
   </div>
-  <login-popup v-if="isLoginPopupActive" class="fixed right-0 mt-12 z-50" />
+  <login-popup v-if="isLoginPopupActive" v-click-outside="showLoginPopup" @close-login-popup="isLoginPopupActive=false" class="fixed right-0 mt-12 z-50" />
 </template>
 
 <script>
@@ -31,7 +31,12 @@ export default {
     },
     showLoginPopup() {
       this.isLoginPopupActive = !this.isLoginPopupActive;
+      console.log(this.isLoginPopupActive);
+
     },
+    printstuff(){
+      console.log("asdfasdfasdf");
+    }
   },
   data() {
     return {

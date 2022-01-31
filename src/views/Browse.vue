@@ -17,44 +17,6 @@ export default {
   components: { CourseListing, ContentWrapper, Sidebar},
   data() {
     return {
-      items: [
-        {
-          courseName: "Math for beginners",
-          courseUrl: "google.com",
-        },
-        {
-          courseName: "Biology I",
-          courseUrl: "blahblahblah",
-        },
-        {
-          courseName: "Biology I",
-          courseUrl: "blahblahblah",
-        },
-        {
-          courseName: "Biology I",
-          courseUrl: "blahblahblah",
-        },
-        {
-          courseName: "Biology I",
-          courseUrl: "blahblahblah",
-        },
-        {
-          courseName: "Biology I",
-          courseUrl: "blahblahblah",
-        },
-        {
-          courseName: "Biology I",
-          courseUrl: "blahblahblah",
-        },
-        {
-          courseName: "Biology I",
-          courseUrl: "blahblahblah",
-        },
-        {
-          courseName: "Biology I",
-          courseUrl: "blahblahblah",
-        },
-      ],
     };
   },
 };
