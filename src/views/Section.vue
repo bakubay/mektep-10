@@ -1,6 +1,6 @@
 <template>
-  <div v-if="currentCourse">
-    <router-link class="flex ml-4 mb-2 text-sm text-green-500 hover:text-green-200" :to="{ name: 'Course', params: { courseId: this.$route.params.courseId } }">
+  <div v-if="currentCourse" class="flex ml-4 mb-2">
+    <router-link class="text-sm text-green-500 hover:text-green-200" :to="{ name: 'Course', params: { courseId: this.$route.params.courseId } }">
       <span class="mr-1">←</span>{{ currentCourse.courseName }}
     </router-link>
   </div>

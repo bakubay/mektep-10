@@ -2,7 +2,7 @@
   <div class="sticky top-0 flex z-50 bg-white h-16 border-b-2 border-gray-100">
     <div class="grid grid-cols-3 gap-4 items-center p-2 md-5 w-full">
       <div class="flex gap-x-2 md:gap-x-5 items-center justify-start ml-2 md:ml-4">
-        <button v-if="this.$route.name == 'Section' || this.$route.name == 'Course'" @click="toggleMobileMenu">
+        <button v-if="this.$route.name == 'Section' || this.$route.name == 'Course'" @click.stop="toggleMobileMenu">
           <menu-alt2-icon class="h-6 w-6 mr-4 text-gray-400 hover:text-gray-700 lg:hidden" />
         </button>
         <div @click.stop="toggleDropdown" class="flex text-gray-400 md:text-base text-sm hover:text-gray-700 items-center">
@@ -41,8 +41,8 @@ export default {
   components: { MenuAlt2Icon, ChevronDownIcon, LoginPopup },
   methods: {
     toggleMobileMenu() {
-      console.log("Show Mobile menu");
       this.$store.commit("toggleMobileMenu");
+      console.log("Clicked toggle mobile menu")
     },
     toggleLoginPopup() {
       this.isLoginPopupActive = !this.isLoginPopupActive;
@@ -52,7 +52,6 @@ export default {
     },
     toggleDropdown() {
       this.isDropdownActive = !this.isDropdownActive;
-      console.log(this.isDropdownActive);
     },
     disableDropdown() {
       this.isDropdownActive = false;
