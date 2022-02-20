@@ -11,7 +11,7 @@
         <div class="w-full flex flex-col md:w-1/3 rounded-md items-center">
           <img
             class="w-36 h-36 md:w-full md:h-auto md:rounded-none rounded-full"
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Coursera-Logo_600x600.svg/1200px-Coursera-Logo_600x600.svg.png"
+            :src="currentCourse.courseImageUrl"
           />
           <!-- :src="currentCourse.imageUrl" -->
           <router-link
@@ -37,7 +37,7 @@ export default {
   computed: {
     currentCourse(){
       return this.$store.getters.getCourseById(this.$route.params.courseId);
-    }
+    },
   },
   async created(){
     if(!this.currentCourse){

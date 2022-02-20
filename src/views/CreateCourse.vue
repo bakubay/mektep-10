@@ -2,7 +2,7 @@
   <content-wrapper :title="`Create Course`">
     <course-creator @course-created="onCourseCreated($event)" />
     <course-lecture-creator v-if="startSectionCreation" @sections-created="onSectionsCreated($event)" />
-    <button @click="onClickSubmitCourse">Submit Course</button>
+    <button class="bg-green-300 hover:bg-green-700 px-4 py-2" @click="onClickSubmitCourse">Submit Course</button>
   </content-wrapper>
 </template>
 
@@ -25,6 +25,7 @@ export default {
     },
     onClickSubmitCourse(){
       addCourse(this.course)
+      alert("Course was submitted. Check DB to confirm")
     }
   },
   data() {
