@@ -1,5 +1,5 @@
 <template>
-  <div id="tableOfContent" v-click-outside="toggleMobileMenu" class="transform lg:transform-none fixed w-3/4 md:w-1/3 lg:w-1/5 z-40 top-16 left-0 flex-none h-full bg-opacity-25 lg:static lg:h-auto lg:overflow-y-visible lg:pt-0 lg:block transition-all delay-100 ease-in" :class="isShowMenu ? 'translate-x-0' : '-translate-x-full'">
+  <div id="tableOfContent" v-click-outside="toggleMobileMenu" class="adj-heigh transform lg:transform-none fixed w-3/4 md:w-1/3 lg:w-1/5 z-40 top-10 left-0 flex-none bg-opacity-25 lg:static lg:h-auto lg:overflow-y-visible lg:pt-0 lg:block transition-all delay-100 ease-in" :class="isShowMenu ? 'translate-x-0' : '-translate-x-full'">
     <div class="h-full overflow-y-auto scrolling-touch lg:h-auto lg:block lg:relative lg:bg-transparent overflow-hidden lg:top-18 bg-white lg:mr-0">
       <nav class="px-1 pt-6 overflow-y-auto text-base sm:px-3 xl:px-5 lg:text-sm pb-10 lg:pt-10 lg:pb-14 sticky?lg:h-(screen-18)">
         <div class="px-3 py-2 font-semibold border-b-2 border-gray-200 border-transparent">Table of Content</div>
@@ -54,5 +54,8 @@ export default {
 <style>
 .activeClass {
   background-color: rgb(209 213 219);
+}
+.adj-heigh {
+  height: calc(100% - 2.5rem);
 }
 </style>

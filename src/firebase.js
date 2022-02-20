@@ -1,14 +1,10 @@
 // Import the functions you need from the SDKs you need
 
-import {
-  initializeApp
-} from "firebase/app"
-import {
-  getFirestore
-} from "firebase/firestore"
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+
 
 const firebaseConfig = {
-
   apiKey: "AIzaSyDyNjI2cEeTSEBfNsF7oVGFWiUARBPBwyQ",
 
   authDomain: "myfirstproject-5899d.firebaseapp.com",
@@ -19,18 +15,15 @@ const firebaseConfig = {
 
   messagingSenderId: "246893635359",
 
-  appId: "1:246893635359:web:5c2d09c1f5b1c92cbff22a"
-
+  appId: "1:246893635359:web:5c2d09c1f5b1c92cbff22a",
 };
 
 initializeApp(firebaseConfig);
 // Initialize Firebase
 export const db = getFirestore();
 
-import {
-  writeBatch,
-  doc
-} from "firebase/firestore"
+import { writeBatch, doc } from "firebase/firestore";
+
 export const addCourse = async (course) => {
   const batch = writeBatch(db);
   const courseRef = doc(db, "courses", course.courseInfo.courseId);
@@ -49,7 +42,7 @@ export const addCourse = async (course) => {
       description: section.description,
       index: section.index,
       addRes: section.addRes,
-    })
-  })
+    });
+  });
   await batch.commit();
-}
+};

@@ -18,6 +18,7 @@ export default {
   components: { CourseLectureCreatorForm },
   methods: {
     onSectionsCreated(){
+      alert("Section are created. You can sumbit course now")
       this.$emit("sections-created", this.courseSections)
     }
   },

@@ -91,7 +91,7 @@ const store = createStore({
                     if(!getters.getCourseById(courseId)){
                         dispatch('pullCourse', courseId)
                     }
-                    commit('SET_COURSE_SECTIONS', {courseId: courseId, sections: firestoreSections})
+                    commit('SET_COURSE_SECTIONS', {courseId: courseId, sections: firestoreSections.sort((a,b) => a.index - b.index)})
                     resolve(firestoreSections)
                 })
             });
