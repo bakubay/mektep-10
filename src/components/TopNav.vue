@@ -14,7 +14,7 @@
         <router-link :to="{ name: 'Home' }" class="font-semibold md:text-2xl text-gray-700">Mektep<span class="text-green-400">10</span></router-link>
       </div>
       <div class="flex gap-x-2 md:gap-x-5 items-center justify-end mr-2 md:mr-4">
-        <button @click.stop="toggleLoginPopup" class="text-gray-400 md:text-base text-sm hover:text-gray-700">Log in</button>
+        <button v-if="false" @click.stop="toggleLoginPopup" class="text-gray-400 md:text-base text-sm hover:text-gray-700">Log in</button>
         <router-link class="text-gray-400 md:text-base text-sm hover:text-gray-700" to="/about">About</router-link>
       </div>
     </div>
