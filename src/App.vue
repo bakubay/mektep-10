@@ -12,7 +12,7 @@
 import Body from "./components/Body.vue";
 import TopNav from "./components/TopNav.vue";
 import Footer from "./components/Footer.vue";
-import { getAuth } from '@firebase/auth';
+import { getAuth, onAuthStateChanged } from '@firebase/auth';
 export default {
   components: {
     TopNav,
@@ -21,6 +21,12 @@ export default {
   },
   created() {
     const auth = getAuth()
+    onAuthStateChanged(auth, (user) => {
+      this.$store.commit('UPDATE_USER', user);
+      if(user){
+        this.$store.dispatch('getCurrentUser')
+      }
+    })
     console.log(auth.currentUser)
   },
 };

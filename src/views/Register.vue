@@ -75,7 +75,7 @@ export default {
         const userRef = doc(db, "users", result.user.uid);
         await setDoc(userRef, {
           firstName: this.firstName,
-          lastname: this.lastName,
+          lastName: this.lastName,
           email: this.email,
         });
         alert("Registered");
