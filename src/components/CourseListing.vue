@@ -9,9 +9,9 @@
             <img class="object-cover w-full" v-if="item.courseImageUrl.length > 0" :src="item.courseImageUrl" />
           </section>
           <div class="text-sm">
-            <div class="flex justify-between mx-1 mt-1 text-gray-500">
-              <div class="">JalagashIT</div>
-              <div class="rounded-md bg-green-100 px-2">IT</div>
+            <div class="flex justify-between mx-1 mt-1 ">
+              <div class="font-light text-gray-500">{{item.courseAuthor}}</div>
+              <div class="rounded-md bg-blue-300 px-2 font-light">{{ item.courseCategory }}</div>
             </div>
             <div class="flex flex-1 mx-1 my-1 text-sm ">
               <b>{{ item.courseName }}</b>

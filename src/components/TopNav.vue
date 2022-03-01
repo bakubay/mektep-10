@@ -64,7 +64,7 @@ export default {
       this.isAccountPopupActive = !this.isAccountPopupActive
     },
     disableAccountPopup(){
-      this.isDropdownActive = false;
+      this.isAccountPopupActive = false;
     }
   },
   computed: {

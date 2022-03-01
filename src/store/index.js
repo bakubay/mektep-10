@@ -82,6 +82,7 @@ const store = createStore({
                         courseDescription: doc.data().courseDescription,
                         courseImageUrl: doc.data().courseImageUrl,
                         courseName: doc.data().courseName,
+                        courseAuthor: doc.data().courseAuthor,
                         courseSections: []
                     }
                     commit('ADD_COURSE', course)
@@ -117,6 +118,7 @@ const store = createStore({
                     courseDescription: courseSnap.data().courseDescription,
                     courseImageUrl: courseSnap.data().courseImageUrl,
                     courseName: courseSnap.data().courseName,
+                    courseAuthor: courseSnap.data().courseAuthor,
                     courseSections: [],
                 }
                 commit('ADD_COURSE', course)
