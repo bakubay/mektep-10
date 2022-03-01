@@ -5,7 +5,7 @@
         <button v-if="this.$route.name == 'Section' || this.$route.name == 'Course'" @click.stop="toggleMobileMenu">
           <menu-alt2-icon class="h-6 w-6 mr-4 text-gray-400 hover:text-gray-700 lg:hidden" />
         </button>
-        <div @click.stop="toggleDropdown" class="flex text-gray-400 md:text-base text-sm hover:text-gray-700 items-center">
+        <div v-if="false" @click.stop="toggleDropdown" class="flex text-gray-400 md:text-base text-sm hover:text-gray-700 items-center">
           <label>Қара</label>
           <chevron-down-icon class="h-3 w-3 mt-0.5 transform transition-transform" :class="isDropdownActive ? 'rotate-180' : 'rotate-0'" />
         </div>
@@ -14,10 +14,12 @@
         <router-link :to="{ name: 'Home' }" class="font-semibold md:text-2xl text-gray-700">Mektep<span class="text-green-400">10</span></router-link>
       </div>
       <div class="flex gap-x-2 md:gap-x-5 items-center justify-end mr-2 md:mr-4">
-        <button v-if="!this.$store.state.user" @click.stop="toggleLoginPopup" class="text-gray-400 md:text-base text-sm hover:text-gray-700">Log in</button>
-        <router-link class="text-gray-400 md:text-base text-sm hover:text-gray-700" to="/about">About</router-link>
-        <div @click.stop="toggleAccountPopup" class="flex text-gray-400 md:text-base text-sm hover:text-gray-700 items-center">
-          <user-circle-icon class="h-6 w-6 mt-0.5 transform transition-transform"/>
+        <div v-if="false">
+          <button v-if="!this.$store.state.user" @click.stop="toggleLoginPopup" class="text-gray-400 md:text-base text-sm hover:text-gray-700">Log in</button>
+          <router-link class="text-gray-400 md:text-base text-sm hover:text-gray-700" to="/about">About</router-link>
+          <div @click.stop="toggleAccountPopup" class="flex text-gray-400 md:text-base text-sm hover:text-gray-700 items-center">
+            <user-circle-icon class="h-6 w-6 mt-0.5 transform transition-transform" />
+          </div>
         </div>
       </div>
     </div>
@@ -40,13 +42,13 @@
 <script>
 import { MenuAlt2Icon, ChevronDownIcon, UserCircleIcon } from "@heroicons/vue/outline";
 import LoginPopup from "./LoginPopup.vue";
-import AccountPopup from "./AccountPopup.vue"
+import AccountPopup from "./AccountPopup.vue";
 export default {
   components: { MenuAlt2Icon, ChevronDownIcon, UserCircleIcon, LoginPopup, AccountPopup },
   methods: {
     toggleMobileMenu() {
       this.$store.commit("toggleMobileMenu");
-      console.log("Clicked toggle mobile menu")
+      console.log("Clicked toggle mobile menu");
     },
     toggleLoginPopup() {
       this.isLoginPopupActive = !this.isLoginPopupActive;
@@ -60,23 +62,23 @@ export default {
     disableDropdown() {
       this.isDropdownActive = false;
     },
-    toggleAccountPopup(){
-      this.isAccountPopupActive = !this.isAccountPopupActive
+    toggleAccountPopup() {
+      this.isAccountPopupActive = !this.isAccountPopupActive;
     },
-    disableAccountPopup(){
+    disableAccountPopup() {
       this.isAccountPopupActive = false;
-    }
+    },
   },
   computed: {
-    userName(){
+    userName() {
       return this.$store.state.profileFirstName;
-      }
+    },
   },
   data() {
     return {
       isLoginPopupActive: false,
       isDropdownActive: false,
-      isAccountPopupActive: false
+      isAccountPopupActive: false,
     };
   },
 };
