@@ -15,7 +15,7 @@
       </div>
       <div class="flex gap-x-2 md:gap-x-5 items-center justify-end mr-2 md:mr-4">
         <button v-if="false" @click.stop="toggleLoginPopup" class="text-gray-400 md:text-base text-sm hover:text-gray-700">Log in</button>
-        <router-link v-of="false" class="text-gray-400 md:text-base text-sm hover:text-gray-700" to="/about">About</router-link>
+        <router-link v-if="false" class="text-gray-400 md:text-base text-sm hover:text-gray-700" to="/about">About</router-link>
       </div>
     </div>
   </div>
@@ -37,7 +37,7 @@
 import { MenuAlt2Icon, ChevronDownIcon } from "@heroicons/vue/outline";
 import LoginPopup from "./LoginPopup.vue";
 export default {
-  components: { MenuAlt2Icon, ChevronDownIcon, LoginPopup, },
+  components: { MenuAlt2Icon, ChevronDownIcon, LoginPopup },
   methods: {
     toggleMobileMenu() {
       this.$store.commit("toggleMobileMenu");
