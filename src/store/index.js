@@ -1,10 +1,6 @@
-import {
-    createStore
-} from "vuex";
-import "firebase/auth";
-import {
-    db
-} from "../firebase";
+import {createStore} from "vuex";
+import {getAuth} from "firebase/auth";
+import {db} from "../firebase";
 import {
     collection,
     getDocs,
@@ -18,7 +14,12 @@ const store = createStore({
     state() {
         return {
             courses: [],
-            showMobileMenu: false
+            showMobileMenu: false,
+            user: null,
+            profileEmail: null,
+            profileLastName: null,
+            profileFirstName: null,
+            profileId: null,
         }
     },
     getters: {
@@ -45,12 +46,21 @@ const store = createStore({
         ADD_COURSE(state, course) {
             state.courses.push(course);
          },
+        UPDATE_USER(state, payload) {
+            state.user = payload
+        },
         SET_COURSE_SECTIONS(state, payload) {
             let courseIndex = state.courses.findIndex(el => el.courseId == payload.courseId);
             state.courses[courseIndex].courseSections = payload.sections
         },
         SET_CURRENT_COURSE(state, course){
             state.currentCourse = course;
+        },
+        SET_PROFILE_INFO(state, user){
+            state.profileId = user.id;
+            state.profileEmail = user.data().email;
+            state.profileFirstName = user.data().firstName;
+            state.profileLastName = user.data().lastname;
         },
         toggleMobileMenu(state){
             state.showMobileMenu = !state.showMobileMenu
@@ -72,6 +82,7 @@ const store = createStore({
                         courseDescription: doc.data().courseDescription,
                         courseImageUrl: doc.data().courseImageUrl,
                         courseName: doc.data().courseName,
+                        courseAuthor: doc.data().courseAuthor,
                         courseSections: []
                     }
                     commit('ADD_COURSE', course)
@@ -107,12 +118,21 @@ const store = createStore({
                     courseDescription: courseSnap.data().courseDescription,
                     courseImageUrl: courseSnap.data().courseImageUrl,
                     courseName: courseSnap.data().courseName,
+                    courseAuthor: courseSnap.data().courseAuthor,
                     courseSections: [],
                 }
                 commit('ADD_COURSE', course)
             } else {
                 console.log('Could not find course');
             }
+        },
+        async getCurrentUser({commit}) {
+            const uid = getAuth().currentUser.uid;
+            const userRef = doc(db, "users", uid);
+            const userSnap = await getDoc(userRef);
+            commit('SET_PROFILE_INFO', userSnap);
+            console.log("UserSnap: ");
+            console.log(userSnap.data());
         }
     }
 })

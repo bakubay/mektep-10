@@ -4,6 +4,10 @@ import Course from '../views/Course.vue'
 import Section from '../views/Section.vue'
 import CreateCourse from '../views/CreateCourse.vue'
 import Browse from '../views/Browse'
+import Login from '../views/Login'
+import Register from '../views/Register'
+import ForgotPassword from '../views/ForgotPassword'
+
 
 
 const routes = [
@@ -36,7 +40,31 @@ const routes = [
     path: '/create-course',
     name: 'CreateCourse',
     component: CreateCourse
-  }
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login,
+    meta: {
+      title: 'Login'
+    }
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register,
+    meta: {
+      title: 'Register'
+    }
+  },
+  {
+    path: '/forgot-password',
+    name: 'ForgotPassword',
+    component: ForgotPassword,
+    meta: {
+      title: 'ForgotPassword'
+    }
+  },
 ]
 
 const router = createRouter({

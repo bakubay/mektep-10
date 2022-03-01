@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "@heroicons/vue": "^1.0.5",
+    "@vuelidate/core": "*",
+    "@vuelidate/validators": "*",
     "core-js": "^3.6.5",
     "firebase": "^9.4.1",
     "firebaseui": "^6.0.0",

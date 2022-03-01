@@ -12,7 +12,13 @@
           </div>
           <div class="flex items-center">
             <div class="w-full flex py-3 items-center space-x-2">
-              <label class="font-semibold leading-none w-1/6">Image</label>
+              <label class="font-semibold leading-none w-1/6">Author</label>
+              <input required :disabled="isDisabled" v-model="courseAuthor" type="text" :class="inputStyle" />
+            </div>
+          </div>
+          <div class="flex items-center">
+            <div class="w-full flex py-3 items-center space-x-2">
+              <label class="font-semibold leading-none w-1/6">Image URL</label>
               <input :disabled="isDisabled" v-model="courseImageUrl" type="text" :class="inputStyle" />
             </div>
           </div>
@@ -46,10 +52,10 @@ export default {
         let courseInfo = {
           courseId: "id-" + Date.now()+ "-" + slugify(this.courseName),
           courseName: this.courseName,
-          courseSlug: slugify("afsd asdf afa fadfs"),
           courseDescription: this.courseDescription,
           courseImageUrl: this.courseImageUrl,
           courseCategory: this.courseCategory,
+          courseAuthor: this.courseAuthor,
         };
         this.$emit("course-created", courseInfo);
         this.isDisabled = true;
@@ -66,6 +72,7 @@ export default {
       courseDescription: "",
       courseImageUrl: "",
       courseCategory: "",
+      courseAuthor: "",
     };
   },
   computed: {

@@ -36,13 +36,12 @@
 <script>
 import { MenuAlt2Icon, ChevronDownIcon } from "@heroicons/vue/outline";
 import LoginPopup from "./LoginPopup.vue";
-
 export default {
-  components: { MenuAlt2Icon, ChevronDownIcon, LoginPopup },
+  components: { MenuAlt2Icon, ChevronDownIcon, LoginPopup, },
   methods: {
     toggleMobileMenu() {
       this.$store.commit("toggleMobileMenu");
-      console.log("Clicked toggle mobile menu")
+      console.log("Clicked toggle mobile menu");
     },
     toggleLoginPopup() {
       this.isLoginPopupActive = !this.isLoginPopupActive;
@@ -55,13 +54,24 @@ export default {
     },
     disableDropdown() {
       this.isDropdownActive = false;
-      console.log(this.isDropdownActive);
+    },
+    toggleAccountPopup() {
+      this.isAccountPopupActive = !this.isAccountPopupActive;
+    },
+    disableAccountPopup() {
+      this.isAccountPopupActive = false;
+    },
+  },
+  computed: {
+    userName() {
+      return this.$store.state.profileFirstName;
     },
   },
   data() {
     return {
       isLoginPopupActive: false,
       isDropdownActive: false,
+      isAccountPopupActive: false,
     };
   },
 };
