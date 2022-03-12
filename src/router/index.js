@@ -7,8 +7,7 @@ import Browse from '../views/Browse'
 import Login from '../views/Login'
 import Register from '../views/Register'
 import ForgotPassword from '../views/ForgotPassword'
-
-
+import Profile from '../views/Profile'
 
 const routes = [
   {
@@ -63,6 +62,14 @@ const routes = [
     component: ForgotPassword,
     meta: {
       title: 'ForgotPassword'
+    }
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile,
+    meta: {
+      title: 'Profile'
     }
   },
 ]
