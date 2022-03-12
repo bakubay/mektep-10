@@ -10,6 +10,8 @@ import {
     getDoc
 } from "firebase/firestore";
 
+const COURSES_COLLECTION = process.env.VUE_APP_COURSES_COLLECTION
+
 const store = createStore({
     state() {
         return {
@@ -71,7 +73,7 @@ const store = createStore({
             state,
             commit
         }) {
-            const coursesRef = collection(db, "courses");
+            const coursesRef = collection(db, COURSES_COLLECTION);
             const q = query(coursesRef, orderBy('courseName', 'desc'));
             const querySnapshot = await getDocs(q);
             querySnapshot.forEach((doc) => {
@@ -83,6 +85,7 @@ const store = createStore({
                         courseImageUrl: doc.data().courseImageUrl,
                         courseName: doc.data().courseName,
                         courseAuthor: doc.data().courseAuthor,
+                        createdAt: doc.data().createdAt,
                         courseSections: []
                     }
                     commit('ADD_COURSE', course)
@@ -108,8 +111,7 @@ const store = createStore({
             });
         },
         async pullCourse({ commit }, courseId) {
-            console.log(courseId);
-            const courseRef = doc(db, "courses", courseId);
+            const courseRef = doc(db, COURSES_COLLECTION, courseId);
             const courseSnap = await getDoc(courseRef);
             if (courseSnap.exists()) {
                 const course = {
@@ -119,6 +121,7 @@ const store = createStore({
                     courseImageUrl: courseSnap.data().courseImageUrl,
                     courseName: courseSnap.data().courseName,
                     courseAuthor: courseSnap.data().courseAuthor,
+                    createdAt: courseSnap.data().createdAt,
                     courseSections: [],
                 }
                 commit('ADD_COURSE', course)

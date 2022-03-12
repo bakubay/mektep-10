@@ -4,6 +4,7 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
 
+
 const firebaseConfig = {
   apiKey: "AIzaSyDyNjI2cEeTSEBfNsF7oVGFWiUARBPBwyQ",
 
@@ -24,18 +25,23 @@ export const db = getFirestore();
 
 import { writeBatch, doc } from "firebase/firestore";
 
+const COURSES_COLLECTION = process.env.VUE_APP_COURSES_COLLECTION
+
 export const addCourse = async (course) => {
   const batch = writeBatch(db);
-  const courseRef = doc(db, "courses", course.courseInfo.courseId);
+  const courseRef = doc(db, COURSES_COLLECTION, course.courseInfo.courseId);
+  const timestamp = Date.now();
   batch.set(courseRef, {
     courseName: course.courseInfo.courseName,
     courseDescription: course.courseInfo.courseDescription,
     courseImageUrl: course.courseInfo.courseImageUrl,
     courseCategory: course.courseInfo.courseCategory,
+    createdAt: timestamp,
+
   });
 
   course.sections.forEach(function (section) {
-    const sectionRef = doc(db, "courses", course.courseInfo.courseId, "sections", section.id);
+    const sectionRef = doc(db, COURSES_COLLECTION, course.courseInfo.courseId, "sections", section.id);
     batch.set(sectionRef, {
       title: section.title,
       url: section.url,
