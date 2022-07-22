@@ -13,7 +13,7 @@
           <router-link :to="{ name: 'ForgotPassword' }" class="text-sm text-green-500 hover:text-green-200">Forgot Password?</router-link>
           <button @click="signin"  class="w-full py-2 bg-green-200 hover:bg-green-100 text-gray-700">Sign in</button>
         </div>
-        <router-link :to="{ name: 'Register' }" class="text-sm text-green-500 hover:text-green-200 mt-6">Not registered?</router-link>
+        <router-link :to="{ name: 'Register' }" @click="onCloseLoginPopup" class="text-sm text-green-500 hover:text-green-200 mt-6">Not registered?</router-link>
       </div>
     </div>
   </div>
