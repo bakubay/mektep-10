@@ -39,14 +39,15 @@
 </template>
 
 <script>
-import { MenuAlt2Icon, ChevronDownIcon } from "@heroicons/vue/outline";
+import { MenuAlt2Icon, ChevronDownIcon, UserCircleIcon } from "@heroicons/vue/outline";
 import LoginPopup from "./LoginPopup.vue";
+import AccountPopup from "./AccountPopup.vue"
 export default {
-  components: { MenuAlt2Icon, ChevronDownIcon, LoginPopup },
+  components: { MenuAlt2Icon, ChevronDownIcon, UserCircleIcon, LoginPopup, AccountPopup },
   methods: {
     toggleMobileMenu() {
       this.$store.commit("toggleMobileMenu");
-      console.log("Clicked toggle mobile menu");
+      console.log("Clicked toggle mobile menu")
     },
     toggleLoginPopup() {
       this.isLoginPopupActive = !this.isLoginPopupActive;
@@ -60,17 +61,16 @@ export default {
     disableDropdown() {
       this.isDropdownActive = false;
     },
-    toggleAccountPopup() {
-      this.isAccountPopupActive = !this.isAccountPopupActive;
+    toggleAccountPopup(){
+      this.isAccountPopupActive = !this.isAccountPopupActive
     },
-    disableAccountPopup() {
+    disableAccountPopup(){
       this.isAccountPopupActive = false;
-    },
+    }
   },
   computed: {
-    userName() {
+    userName(){
       return this.$store.state.profileFirstName;
-
       },
     user(){
       return this.$store.state.user;
@@ -80,7 +80,7 @@ export default {
     return {
       isLoginPopupActive: false,
       isDropdownActive: false,
-      isAccountPopupActive: false,
+      isAccountPopupActive: false
     };
   },
 };
