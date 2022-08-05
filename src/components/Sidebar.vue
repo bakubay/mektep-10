@@ -1,16 +1,16 @@
 <template>
-  <div id="tableOfContent" v-click-outside="toggleMobileMenu" class="adj-heigh transform lg:transform-none fixed w-3/4 md:w-1/3 lg:w-1/5 z-40 top-10 left-0 flex-none bg-opacity-25 lg:static lg:h-auto lg:overflow-y-visible lg:pt-0 lg:block transition-all delay-100 ease-in" :class="isShowMenu ? 'translate-x-0' : '-translate-x-full'">
+  <div id="tableOfContent" v-click-outside="toggleMobileMenu" class="adj-height transform lg:transform-none fixed w-3/4 md:w-1/3 lg:w-1/5 z-40 top-10 left-0 flex-none bg-opacity-25 lg:static lg:max-h-screen lg:overflow-y-scroll lg:pt-0 lg:block transition-all delay-100 ease-in" :class="isShowMenu ? 'translate-x-0' : '-translate-x-full'">
     <div class="h-full overflow-y-auto scrolling-touch lg:h-auto lg:block lg:relative lg:bg-transparent overflow-hidden lg:top-18 bg-white lg:mr-0">
       <nav class="px-1 pt-6 overflow-y-auto text-base sm:px-3 xl:px-5 lg:text-sm pb-10 lg:pt-10 lg:pb-14 sticky?lg:h-(screen-18)">
         <div class="px-3 py-2 font-semibold border-b-2 border-gray-200 border-transparent">Table of Content</div>
         <ul>
-          <li v-for="(section, i) in sections" :key="i" :class="{ activeClass: sectionId == i + 1 }" class="hover:bg-gray-300 transition-colors duration-200">
+          <li v-for="(section, i) in sections" :key="i" :class="{ activeClass: sectionId == i + 1}" class="hover:bg-gray-300 transition-colors duration-100">
             <router-link :to="{ name: 'Section', params: { sectionId: section.index } }">
               <div class="flex items-stretch pl-2">
                 <div class="flex flex-col">
                   <div class="border-r-2 flex-1 mx-auto z-50" :class="i !== 0 ? 'opacity-100' : 'opacity-0'"></div>
                   <div class="w-4 h-4 rounded-full border-2 shadow-sm border-gray-200 bg-white flex justify-center items-center">
-                    <div class="w-2 h-2 rounded-full bg-green-300" :class="isStudied"></div>
+                    <div v-if="userCourse && userCourseSections[(i+1)]" class="w-2 h-2 rounded-full bg-green-300" :class="isStudied"></div>
                   </div>
                   <div class="border-r-2 flex-1 mx-auto z-50" :class="i !== sections.length - 1 ? 'opacity-100' : 'opacity-0'"></div>
                 </div>
@@ -30,22 +30,33 @@
 export default {
   props: ["sections", "sectionId"],
   data() {
-    return {};
+    return {
+    };
   },
   computed: {
     isShowMenu() {
       return this.$store.state.showMobileMenu;
     },
     isStudied() {
-      return "oppacity-100";
+      return "bg-green-300";
     },
+    userCourse() {
+      return this.$store.getters.getUserCourseById(this.$route.params.courseId);
+    },
+    userCourseSections(){
+      if(this.userCourse){
+        return this.userCourse.finishedSections
+      }
+      else {
+        return {}
+      }
+    }
   },
   methods: {
     toggleMobileMenu() {
       if(this.isShowMenu === true){
         this.$store.commit("toggleMobileMenu");
       }
-      console.log(this.isShowMenu)
     },
   },
 };
@@ -55,7 +66,7 @@ export default {
 .activeClass {
   background-color: rgb(209 213 219);
 }
-.adj-heigh {
-  height: calc(100% - 2.5rem);
+.adj-height {
+  height: calc(100vh - 190px);
 }
 </style>

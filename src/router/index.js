@@ -7,8 +7,8 @@ import Browse from '../views/Browse'
 import Login from '../views/Login'
 import Register from '../views/Register'
 import ForgotPassword from '../views/ForgotPassword'
-
-
+import Profile from '../views/Profile'
+import NotFound from '../views/NotFound'
 
 const routes = [
   {
@@ -40,6 +40,7 @@ const routes = [
     path: '/create-course',
     name: 'CreateCourse',
     component: CreateCourse
+    // check if admin
   },
   {
     path: '/login',
@@ -65,6 +66,19 @@ const routes = [
       title: 'ForgotPassword'
     }
   },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile,
+    meta: {
+      title: 'Profile'
+    }
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: NotFound,
+  }
 ]
 
 const router = createRouter({

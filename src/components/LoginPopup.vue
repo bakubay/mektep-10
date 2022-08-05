@@ -3,17 +3,17 @@
     <div class="px-2 w-screen md:max-w-md">
       <div class="bg-white shadow-lg border-t-2 border-green-100 flex flex-col px-6 py-4 justify-center items-center">
         <XIcon @click="onCloseLoginPopup" class="w-4 h-4 cursor-pointer text-gray-400 hover:text-gray-600 justify-items-end ml-auto" />
-        <h2>Log in</h2>
         <div class="w-full" id="firebaseui-auth-container"></div>
         <form class="mt-2 flex flex-col gap-2 w-full px-4">
-          <input placeholder="Email" v-model="email" type="text" class="flex-1 leading-none text-gray-900 p-3 focus:outline-none focus:border-green-200 border rounded border-gray-200" />
-          <input placeholder="Password" v-model="password" type="text" class="flex-1 leading-none text-gray-900 p-3 focus:outline-none focus:border-green-200 border rounded border-gray-200" />
+          <input :class="v$.email.$invalid ? 'focus:border-red-500' : 'focus:border-green-200'" placeholder="Email" v-model="email" type="text" class="flex-1 leading-none text-gray-900 p-3 focus:outline-none border rounded border-gray-200" />
+          <input @keyup.enter="signin" :class="v$.password.$invalid ? 'focus:border-red-500' : 'focus:border-green-200'" placeholder="Password" v-model="password" type="password" class="flex-1 leading-none text-gray-900 p-3 focus:outline-none border rounded border-gray-200" />
+          <span class="text-red-500 text-sm" v-if="error">Email or Password incorrect</span>
         </form>
         <div class="w-full px-4 mt-4">
           <router-link :to="{ name: 'ForgotPassword' }" class="text-sm text-green-500 hover:text-green-200">Forgot Password?</router-link>
-          <button class="w-full py-2 bg-green-200 hover:bg-green-100 text-gray-700">Sign in</button>
+          <button @click="signin"  class="w-full py-2 bg-green-200 hover:bg-green-100 text-gray-700">Sign in</button>
         </div>
-        <router-link :to="{ name: 'Register' }" class="text-sm text-green-500 hover:text-green-200 mt-6">Not registered?</router-link>
+        <router-link :to="{ name: 'Register' }" @click="onCloseLoginPopup" class="text-sm text-green-500 hover:text-green-200 mt-6">Not registered?</router-link>
       </div>
     </div>
   </div>
@@ -21,16 +21,30 @@
 
 <script>
 import { XIcon } from "@heroicons/vue/solid";
-import { getAuth, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider } from "firebase/auth";
 import * as firebaseui from "firebaseui";
 import "firebaseui/dist/firebaseui.css";
+import useVuelidate from "@vuelidate/core";
+import { required, email, minLength } from "@vuelidate/validators";
+
 
 export default {
   components: { XIcon },
+  setup() {
+    return { v$: useVuelidate() };
+  },
   data() {
     return {
       email: "",
       password: "",
+      errorMsg: "",
+      error: false,
+    };
+  },
+  validations() {
+    return {
+      email: { required, email }, // Matches this.contact.email
+      password: { required, minLength: minLength(6) },
     };
   },
   mounted() {
@@ -48,6 +62,25 @@ export default {
   methods: {
     onCloseLoginPopup() {
       this.$emit("close-login-popup");
+    },
+    async signin() {
+      const auth = getAuth();
+      const isFormCorrect = await this.v$.$validate()
+      if (isFormCorrect) {
+        signInWithEmailAndPassword(auth, this.email, this.password)
+          .then((userCredential) => {
+            this.$router.push({ path: "/" });
+            console.log(userCredential.user);
+            alert("Log in successful");
+            this.onCloseLoginPopup();
+          })
+          .catch((err) => {
+            this.error = true;
+            this.errorMsg = err.message;
+          });
+      } else {
+        alert("Form failed validation");
+      }
     },
   },
 };

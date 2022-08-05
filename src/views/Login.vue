@@ -6,7 +6,7 @@
         <div class="w-full" id="firebaseui-auth-container"></div>
         <form class="my-2 flex flex-col gap-2 w-full px-4">
           <input :class="v$.email.$invalid ? 'focus:border-red-500' : 'focus:border-green-200'" placeholder="Email" v-model="email" type="text" class="flex-1 leading-none text-gray-900 p-3 focus:outline-none border rounded border-gray-200" />
-          <input :class="v$.password.$invalid ? 'focus:border-red-500' : 'focus:border-green-200'" placeholder="Password" v-model="password" type="text" class="flex-1 leading-none text-gray-900 p-3 focus:outline-none border rounded border-gray-200" />
+          <input :class="v$.password.$invalid ? 'focus:border-red-500' : 'focus:border-green-200'" placeholder="Password" v-model="password" type="password" class="flex-1 leading-none text-gray-900 p-3 focus:outline-none border rounded border-gray-200" />
           <span class="text-red-500 text-sm" v-if="error">Email or Password incorrect</span>
         </form>
         <div class="w-full px-4 mt-4">

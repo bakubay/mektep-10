@@ -4,7 +4,7 @@
       <span class="mr-1">←</span>{{ currentCourse.courseName }}
     </router-link>
   </div>
-  <div class="flex" v-if="currentCourse && currentSection && sectionsReady">
+  <div class="flex" v-if="currentCourse && currentSection ">
     <sidebar :sections="currentCourse.courseSections" :sectionId="this.$route.params.sectionId" />
     <content-wrapper :title="currentSection.title">
       <course-content-area :contentUrl="currentSection.url"/>
@@ -53,12 +53,15 @@ export default {
     },
   },
   async created() {
+    console.log(this.$route.params.sectionId,  this.$route.params.courseId);
     if (!this.currentCourse) {
-      this.$store.dispatch("pullCourse", this.$route.params.courseId);
+      await this.$store.dispatch("pullCourse", this.$route.params.courseId).then((e) => {
+         if(e == -1) { this.$router.push({ name: "NotFound" })}
+        });
     }
-    await this.$store.dispatch("pullCourseSections", this.$route.params.courseId).then(() => {
-      this.sectionsReady = true;
-    });
+    if (this.$store.state.user) {
+      await this.$store.dispatch("addSectionToUserCourse", {courseId: this.$route.params.courseId, sectionIndex: this.$route.params.sectionId});
+    }
   },
 };
 </script>

@@ -77,6 +77,8 @@ export default {
           firstName: this.firstName,
           lastName: this.lastName,
           email: this.email,
+          courses: {},
+          isActive: true,
         });
         alert("Registered");
         this.$router.push({ path: "/" });
