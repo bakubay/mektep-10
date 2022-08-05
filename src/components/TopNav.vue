@@ -5,7 +5,7 @@
         <button v-if="this.$route.name == 'Section' || this.$route.name == 'Course'" @click.stop="toggleMobileMenu">
           <menu-alt2-icon class="h-6 w-6 mr-4 text-gray-400 hover:text-gray-700 lg:hidden" />
         </button>
-        <div @click.stop="toggleDropdown" class="flex text-gray-400 md:text-base text-sm hover:text-gray-700 items-center">
+        <div v-if="false" @click.stop="toggleDropdown" class="flex text-gray-400 md:text-base text-sm hover:text-gray-700 items-center">
           <label>Қара</label>
           <chevron-down-icon class="h-3 w-3 mt-0.5 transform transition-transform" :class="isDropdownActive ? 'rotate-180' : 'rotate-0'" />
         </div>
@@ -33,20 +33,20 @@
       </ul>
     </div>
   </div>
+
   <login-popup v-show="isLoginPopupActive" v-click-outside="disableLoginPopup" @close-login-popup="disableLoginPopup" class="fixed right-0 mt-12 z-50" />
   <account-popup v-show="isAccountPopupActive" v-click-outside="disableAccountPopup" @close-account-popup="disableAccountPopup" class="fixed right-0 mt-12 z-50" />
 </template>
 
 <script>
-import { MenuAlt2Icon, ChevronDownIcon, UserCircleIcon } from "@heroicons/vue/outline";
+import { MenuAlt2Icon, ChevronDownIcon } from "@heroicons/vue/outline";
 import LoginPopup from "./LoginPopup.vue";
-import AccountPopup from "./AccountPopup.vue"
 export default {
-  components: { MenuAlt2Icon, ChevronDownIcon, UserCircleIcon, LoginPopup, AccountPopup },
+  components: { MenuAlt2Icon, ChevronDownIcon, LoginPopup },
   methods: {
     toggleMobileMenu() {
       this.$store.commit("toggleMobileMenu");
-      console.log("Clicked toggle mobile menu")
+      console.log("Clicked toggle mobile menu");
     },
     toggleLoginPopup() {
       this.isLoginPopupActive = !this.isLoginPopupActive;
@@ -60,16 +60,17 @@ export default {
     disableDropdown() {
       this.isDropdownActive = false;
     },
-    toggleAccountPopup(){
-      this.isAccountPopupActive = !this.isAccountPopupActive
+    toggleAccountPopup() {
+      this.isAccountPopupActive = !this.isAccountPopupActive;
     },
-    disableAccountPopup(){
+    disableAccountPopup() {
       this.isAccountPopupActive = false;
-    }
+    },
   },
   computed: {
-    userName(){
+    userName() {
       return this.$store.state.profileFirstName;
+
       },
     user(){
       return this.$store.state.user;
@@ -79,7 +80,7 @@ export default {
     return {
       isLoginPopupActive: false,
       isDropdownActive: false,
-      isAccountPopupActive: false
+      isAccountPopupActive: false,
     };
   },
 };
