@@ -14,6 +14,6 @@ export default {
 
 <style>
 #body-container {
-  min-height: calc(100vh - 64px);
+  min-height: calc(100vh - 190px);
 }
 </style>

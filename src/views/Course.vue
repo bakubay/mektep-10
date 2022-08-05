@@ -1,5 +1,6 @@
 <template>
-  <div class="flex" v-if="currentCourse && showSections">
+  <Spinner v-if="!currentCourse"/>
+  <div class="flex" v-else>
     <sidebar :sections="currentCourse.courseSections"/>
     <content-wrapper :title="currentCourse.courseName">
       <div class="flex flex-col-reverse md:flex-row mt-4 justify-between py-4">
@@ -14,10 +15,12 @@
             :src="currentCourse.courseImageUrl"
           />
           <!-- :src="currentCourse.imageUrl" -->
-          <router-link
+          <router-link @click="subscribeUserToCourse"
           :to="{name: 'Section', params: {sectionId: 1}}" 
-          class="w-full px-6 py-2 mt-2 bg-green-100 hover:bg-green-500 text-center"
-          >Start</router-link>
+          class="w-full px-6 py-2 mt-2 bg-green-100 hover:bg-green-500 text-center">
+            <label v-if="user">Start</label>
+            <label v-else>View</label>
+          </router-link>
         </div>
       </div>
     </content-wrapper>
@@ -27,27 +30,37 @@
 <script>
 import ContentWrapper from "../components/ContentWrapper.vue";
 import Sidebar from "../components/Sidebar.vue";
+import Spinner from "../components/utils/Spinner.vue"
 export default {
-  components: { ContentWrapper, Sidebar },
+  components: { ContentWrapper, Sidebar, Spinner },
   data(){
     return {
-      showSections: false
     }
   },
   computed: {
     currentCourse(){
       return this.$store.getters.getCourseById(this.$route.params.courseId);
     },
+    user(){
+      return this.$store.state.user;
+    }
+  },
+  methods:{
+    subscribeUserToCourse() {
+      if(this.user){
+        this.$store.dispatch("subscribeUserToCourse", this.$route.params.courseId).then(() => alert("LEEETS  GOOO"));
+      }
+    },
+    async initCourse() {
+      if(!this.currentCourse){
+       await this.$store.dispatch("pullCourse", this.$route.params.courseId).then((e) => {
+         if(e == -1) { this.$router.push({ name: "NotFound" })}
+        })
+      }
+    }
   },
   async created(){
-    if(!this.currentCourse){
-      await this.$store.dispatch("pullCourse", this.$route.params.courseId).then(() =>{})
-    }
-    this.$store.dispatch("pullCourseSections", this.$route.params.courseId).then(( ) =>{
-      this.showSections = true
-      }
-    );
+    this.initCourse()
   }
-};
-
+}
 </script>

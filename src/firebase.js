@@ -37,7 +37,6 @@ export const addCourse = async (course) => {
     courseImageUrl: course.courseInfo.courseImageUrl,
     courseCategory: course.courseInfo.courseCategory,
     createdAt: timestamp,
-
   });
 
   course.sections.forEach(function (section) {

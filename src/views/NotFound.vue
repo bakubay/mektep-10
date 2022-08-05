@@ -1,8 +1,7 @@
 <template>
-  <content-wrapper :title="`About`" >
-    <div class="flex">
+  <content-wrapper :title="`404 Not Found`" >
+    <div class="flex justify-center">
       <img class="w-full sm:w-1/4" src="Mektep.jpg">
-      <div class=" text-center text-4xl">Our aim is to provide high quality education material in Kazakh language</div>
     </div>
   </content-wrapper>
 </template>

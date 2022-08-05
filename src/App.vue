@@ -2,7 +2,7 @@
   <div class="flex flex-col">
     <TopNav />
     <Body>
-      <router-view />
+      <router-view :key="$route.path" />
     </Body>
     <Footer />
   </div>
@@ -24,7 +24,7 @@ export default {
     onAuthStateChanged(auth, (user) => {
       this.$store.commit('UPDATE_USER', user);
       if(user){
-        this.$store.dispatch('getCurrentUser')
+        this.$store.dispatch('getCurrentUser');
       }
     })
     console.log(auth.currentUser)
